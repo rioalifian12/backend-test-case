@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Peminjaman buku",
+    "description": "Untuk API Peminjaman buku",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000",
+      "description": "localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Member",
+      "description": "Member"
+    },
+    {
+      "name": "Book",
+      "description": "Book"
+    },
+    {
+      "name": "Borrow",
+      "description": "Borrow"
+    }
+  ],
+  "paths": {
+    "/member": {
+      "get": {
+        "tags": ["Member"],
+        "summary": "Get All Member",
+        "description": "Menampilkan semua member beserta jumlah peminjaman",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/book": {
+      "get": {
+        "tags": ["Book"],
+        "summary": "Get All Book",
+        "description": "Menampilkan semua buku kecuali yang sedang dipinjam",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/borrow": {
+      "post": {
+        "tags": ["Borrow"],
+        "summary": "Post Borrow",
+        "description": "Menambahkan data peminjaman",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idMember": {
+                    "type": "integer"
+                  },
+                  "idBook": {
+                    "type": "integer"
+                  },
+                  "tanggalPinjam": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/borrow/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true,
+          "description": "Numeric ID of the borrow"
+        }
+      ],
+      "patch": {
+        "tags": ["Borrow"],
+        "summary": "Update Borrow",
+        "description": "Mengubah data peminjaman",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tanggalKembali": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
