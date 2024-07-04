@@ -1,3 +1,7 @@
+### Database Relation
+
+![ERD Peminjaman Buku](https://github.com/rioalifian12/backend-test-case/blob/main/ERD.png)
+
 ### Installation project
 
 - clone project `git clone https://github.com/rioalifian12/backend-test-case.git`
